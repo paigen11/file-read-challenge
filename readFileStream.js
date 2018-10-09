@@ -33,13 +33,17 @@ rl.on('line', function(line) {
   // get all first halves of names
   console.time('most common first name');
   var firstHalfOfName = name.split(', ')[1];
-  // filter out middle initials
-  if (firstHalfOfName !== undefined && firstHalfOfName.includes(' ')) {
-    firstName = firstHalfOfName.split(' ')[0];
-  } else {
-    firstNames.push(firstHalfOfName);
+  if (firstHalfOfName !== undefined) {
+    firstHalfOfName.trim();
+    // filter out middle initials
+    if (firstHalfOfName.includes(' ') && firstHalfOfName !== ' ') {
+      firstName = firstHalfOfName.split(' ')[0];
+      firstName.trim();
+      firstNames.push(firstName);
+    } else {
+      firstNames.push(firstHalfOfName);
+    }
   }
-  firstNames.push(firstHalfOfName);
 
   // year and month
   console.time('total donations for each month');

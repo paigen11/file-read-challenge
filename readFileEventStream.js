@@ -23,7 +23,7 @@ var s = fs
         // get all names
         console.time('names');
         var name = line.split('|')[7];
-        if (totalLines === 432 || totalLines === 43243) {
+        if (totalLines === 433 || totalLines === 43244) {
           names.push(name);
         }
 
@@ -32,13 +32,18 @@ var s = fs
         // get all first halves of names
         console.time('most common first name');
         var firstHalfOfName = name.split(', ')[1];
-        // filter out middle initials
-        if (firstHalfOfName !== undefined && firstHalfOfName.includes(' ')) {
-          firstName = firstHalfOfName.split(' ')[0];
-        } else {
-          firstNames.push(firstHalfOfName);
+        if (firstHalfOfName !== undefined) {
+          firstHalfOfName.trim();
+
+          // filter out middle initials
+          if (firstHalfOfName.includes(' ') && firstHalfOfName !== ' ') {
+            firstName = firstHalfOfName.split(' ')[0];
+            firstName.trim();
+            firstNames.push(firstName);
+          } else {
+            firstNames.push(firstHalfOfName);
+          }
         }
-        firstNames.push(firstHalfOfName);
 
         // year and month
         console.time('total donations for each month');
@@ -68,9 +73,9 @@ var s = fs
           sortedDupeNames.push([name, dupeNames[name]]);
         }
         sortedDupeNames.sort((a, b) => {
-          return a[1] - b[1];
+          return b[1] - a[1];
         });
-        console.log(sortedDupeNames[sortedDupeNames.length - 1]);
+        console.log(sortedDupeNames[0]);
         console.timeEnd('most common first name');
 
         // number of donations per month
