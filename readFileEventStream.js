@@ -11,8 +11,8 @@ var dateDonations = {};
 
 var s = fs
   // .createReadStream('test.txt')
-  // .createReadStream('itcont.txt')
-  .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
+  .createReadStream('itcont.txt')
+  // .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
   .pipe(es.split())
   .pipe(
     es
@@ -27,6 +27,8 @@ var s = fs
           names.push(name);
         }
 
+        // names.push(name);
+
         // get all first halves of names
         console.time('most common first name');
         var firstHalfOfName = name.split(', ')[1];
@@ -37,17 +39,6 @@ var s = fs
           firstNames.push(firstHalfOfName);
         }
         firstNames.push(firstHalfOfName);
-
-        firstNames.forEach(x => {
-          dupeNames[x] = (dupeNames[x] || 0) + 1;
-        });
-        var sortedDupeNames = [];
-        for (var name in dupeNames) {
-          sortedDupeNames.push([name, dupeNames[name]]);
-        }
-        sortedDupeNames.sort((a, b) => {
-          return a[1] - b[1];
-        });
 
         // year and month
         console.time('total donations for each month');
@@ -64,10 +55,21 @@ var s = fs
         console.log(totalLines);
         console.timeEnd('line count');
 
+        // console.log(names[432]);
         console.log(names);
         console.timeEnd('names');
 
         // most common first name
+        firstNames.forEach(x => {
+          dupeNames[x] = (dupeNames[x] || 0) + 1;
+        });
+        var sortedDupeNames = [];
+        for (var name in dupeNames) {
+          sortedDupeNames.push([name, dupeNames[name]]);
+        }
+        sortedDupeNames.sort((a, b) => {
+          return a[1] - b[1];
+        });
         console.log(sortedDupeNames[sortedDupeNames.length - 1]);
         console.timeEnd('most common first name');
 
