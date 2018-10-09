@@ -2,7 +2,6 @@ var fs = require('fs'),
   es = require('event-stream');
 
 var totalLines = 0;
-var lines = [];
 var names = [];
 var firstNames = [];
 var dupeNames = {};
@@ -11,8 +10,8 @@ var dateDonations = {};
 
 var s = fs
   // .createReadStream('test.txt')
-  .createReadStream('itcont.txt')
-  // .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
+  // .createReadStream('itcont.txt')
+  .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
   .pipe(es.split())
   .pipe(
     es
@@ -32,6 +31,7 @@ var s = fs
         // get all first halves of names
         console.time('most common first name');
         var firstHalfOfName = name.split(', ')[1];
+
         if (firstHalfOfName !== undefined) {
           firstHalfOfName.trim();
 
