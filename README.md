@@ -10,6 +10,8 @@ Download the large file zip here: https://www.fec.gov/files/bulk-downloads/2018/
 The main file in the zip: `itcont.txt`, can only be processed by the `readFileEventStream.js` file, the other two implementations can't handle the 2.55GB file size in memory (Node.js can only hold about 1.5GB in memory at one time).
 
 ### To Run
+Before the first run, run `npm install` from the command line to install the `event-stream` package from Node.
+
 Add the file path for one of the files (could be the big one `itcont.txt` or any of its smaller siblings in the `indiv18` folder that were just downloaded), and type the command `node <FILE_NAME_TO_RUN>` in the command line.
 
 Then you'll see the answers required from the file printed out to the terminal.
