@@ -8,7 +8,7 @@ var dupeNames = {};
 var dateDonationCount = [];
 var dateDonations = {};
 
-fs.readFile('test.txt', 'utf8', (err, contents) => {
+fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   console.time('line count');
   if (contents !== undefined) {
     totalLines = contents.split('\n').length - 1;

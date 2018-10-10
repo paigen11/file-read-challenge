@@ -2,7 +2,9 @@ var fs = require('fs');
 var readline = require('readline');
 var stream = require('stream');
 
-var instream = fs.createReadStream('test.txt');
+var instream = fs.createReadStream(
+  '/Users/pxn5096/Downloads/indiv18/itcont.txt',
+);
 var outstream = new stream();
 var rl = readline.createInterface(instream, outstream);
 
