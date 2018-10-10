@@ -2,7 +2,7 @@ var fs = require('fs');
 var readline = require('readline');
 var stream = require('stream');
 
-var instream = fs.createReadStream('itcont.txt');
+var instream = fs.createReadStream('test.txt');
 var outstream = new stream();
 var rl = readline.createInterface(instream, outstream);
 
@@ -67,13 +67,12 @@ rl.on('close', function() {
     dupeNames[x] = (dupeNames[x] || 0) + 1;
   });
   var sortedDupeNames = [];
-  for (var name in dupeNames) {
-    sortedDupeNames.push([name, dupeNames[name]]);
-  }
+  sortedDupeNames = Object.entries(dupeNames);
+
   sortedDupeNames.sort((a, b) => {
-    return a[1] - b[1];
+    return b[1] - a[1];
   });
-  console.log(sortedDupeNames[sortedDupeNames.length - 1]);
+  console.log(sortedDupeNames[0]);
   console.timeEnd('most common first name');
 
   // number of donations per month

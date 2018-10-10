@@ -10,8 +10,8 @@ var dateDonations = {};
 
 var s = fs
   // .createReadStream('test.txt')
-  // .createReadStream('itcont.txt')
-  .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
+  .createReadStream('itcont.txt')
+  // .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
   .pipe(es.split())
   .pipe(
     es
@@ -69,9 +69,8 @@ var s = fs
           dupeNames[x] = (dupeNames[x] || 0) + 1;
         });
         var sortedDupeNames = [];
-        for (var name in dupeNames) {
-          sortedDupeNames.push([name, dupeNames[name]]);
-        }
+        sortedDupeNames = Object.entries(dupeNames);
+
         sortedDupeNames.sort((a, b) => {
           return b[1] - a[1];
         });

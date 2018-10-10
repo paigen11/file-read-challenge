@@ -8,7 +8,7 @@ var dupeNames = {};
 var dateDonationCount = [];
 var dateDonations = {};
 
-fs.readFile('itcont.txt', 'utf8', (err, contents) => {
+fs.readFile('test.txt', 'utf8', (err, contents) => {
   console.time('line count');
   if (contents !== undefined) {
     totalLines = contents.split('\n').length - 1;
@@ -49,13 +49,12 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
     dupeNames[x] = (dupeNames[x] || 0) + 1;
   });
   var sortedDupeNames = [];
-  for (var name in dupeNames) {
-    sortedDupeNames.push([name, dupeNames[name]]);
-  }
+  sortedDupeNames = Object.entries(dupeNames);
+
   sortedDupeNames.sort((a, b) => {
-    return a[1] - b[1];
+    return b[1] - a[1];
   });
-  console.log(sortedDupeNames[sortedDupeNames.length - 1]);
+  console.log(sortedDupeNames[0]);
   console.timeEnd('most common first name');
 
   console.time('total donations for each month');
