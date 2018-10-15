@@ -1,5 +1,6 @@
 var fs = require('fs'),
   es = require('event-stream');
+var now = require('performance-now');
 
 var totalLines = 0;
 var names = [];
@@ -17,10 +18,13 @@ var s = fs
     es
       .mapSync(function(line) {
         console.time('line count');
+        let t0 = now();
+
         totalLines++;
 
         // get all names
         console.time('names');
+        t0 = now();
         var name = line.split('|')[7];
         if (totalLines === 433 || totalLines === 43244) {
           names.push(name);
@@ -28,6 +32,7 @@ var s = fs
 
         // get all first halves of names
         console.time('most common first name');
+        t0 = now();
         var firstHalfOfName = name.split(', ')[1];
 
         if (firstHalfOfName !== undefined) {
@@ -45,6 +50,7 @@ var s = fs
 
         // year and month
         console.time('total donations for each month');
+        t0 = now();
         var timestamp = line.split('|')[4].slice(0, 6);
         var formattedTimestamp =
           timestamp.slice(0, 4) + '-' + timestamp.slice(4, 6);
@@ -55,12 +61,18 @@ var s = fs
       })
       .on('end', function() {
         console.log('Read entire file.');
+        let t1 = now();
         console.log(totalLines);
         console.timeEnd('line count');
+        console.log(
+          `Performance now line count timing: ` + (t1 - t0).toFixed(3),
+        );
 
         // console.log(names[432]);
         console.log(names);
+        t1 = now();
         console.timeEnd('names');
+        console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3));
 
         // most common first name
         firstNames.forEach(x => {
@@ -73,7 +85,11 @@ var s = fs
           return b[1] - a[1];
         });
         console.log(sortedDupeNames[0]);
+        t1 = now();
         console.timeEnd('most common first name');
+        console.log(
+          `Performance now first name timing: ` + (t1 - t0).toFixed(3),
+        );
 
         // number of donations per month
         dateDonationCount.forEach(x => {
@@ -85,6 +101,10 @@ var s = fs
           );
         };
         new Map(Object.entries(dateDonations)).forEach(logDateElements);
+        t1 = now();
         console.timeEnd('total donations for each month');
+        console.log(
+          `Performance now donations per month timing: ` + (t1 - t0).toFixed(3),
+        );
       }),
   );

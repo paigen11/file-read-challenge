@@ -1,6 +1,7 @@
 var fs = require('fs');
 var readline = require('readline');
 var stream = require('stream');
+var now = require('performance-now');
 
 var instream = fs.createReadStream(
   '/Users/pxn5096/Downloads/indiv18/itcont.txt',
@@ -25,15 +26,18 @@ var dupeNames = {};
 rl.on('line', function(line) {
   // increment line count
   console.time('line count');
+  let t0 = now();
   lineCount++;
 
   // get all names
   console.time('names');
+  t0 = now();
   var name = line.split('|')[7];
   names.push(name);
 
   // get all first halves of names
   console.time('most common first name');
+  t0 = now();
   var firstHalfOfName = name.split(', ')[1];
   if (firstHalfOfName !== undefined) {
     firstHalfOfName.trim();
@@ -49,6 +53,7 @@ rl.on('line', function(line) {
 
   // year and month
   console.time('total donations for each month');
+  t0 = now();
   var timestamp = line.split('|')[4].slice(0, 6);
   var formattedTimestamp = timestamp.slice(0, 4) + '-' + timestamp.slice(4, 6);
   dateDonationCount.push(formattedTimestamp);
@@ -56,13 +61,17 @@ rl.on('line', function(line) {
 
 rl.on('close', function() {
   // total line count
+  let t1 = now();
   console.log(lineCount);
   console.timeEnd('line count');
+  console.log(`Performance now line count timing: ` + (t1 - t0).toFixed(3));
 
   // names at various points in time
   console.log(names[432]);
   console.log(names[43243]);
+  t1 = now();
   console.timeEnd('names');
+  console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3));
 
   // most common first name
   firstNames.forEach(x => {
@@ -75,7 +84,9 @@ rl.on('close', function() {
     return b[1] - a[1];
   });
   console.log(sortedDupeNames[0]);
+  t1 = now();
   console.timeEnd('most common first name');
+  console.log(`Performance now first name timing: ` + (t1 - t0).toFixed(3));
 
   // number of donations per month
   dateDonationCount.forEach(x => {
@@ -87,5 +98,9 @@ rl.on('close', function() {
     );
   };
   new Map(Object.entries(dateDonations)).forEach(logDateElements);
+  t1 = now();
   console.timeEnd('total donations for each month');
+  console.log(
+    `Performance now donations per month timing: ` + (t1 - t0).toFixed(3),
+  );
 });
