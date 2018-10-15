@@ -3,9 +3,7 @@ var readline = require('readline');
 var stream = require('stream');
 var now = require('performance-now');
 
-var instream = fs.createReadStream(
-  '/Users/pxn5096/Downloads/indiv18/itcont.txt',
-);
+var instream = fs.createReadStream('itcont.txt');
 var outstream = new stream();
 var rl = readline.createInterface(instream, outstream);
 
@@ -23,10 +21,13 @@ var dateDonations = {};
 var firstNames = [];
 var dupeNames = {};
 
+var t0 = now();
+var t1 = now();
+
 rl.on('line', function(line) {
   // increment line count
   console.time('line count');
-  let t0 = now();
+  t0 = now();
   lineCount++;
 
   // get all names
@@ -61,7 +62,7 @@ rl.on('line', function(line) {
 
 rl.on('close', function() {
   // total line count
-  let t1 = now();
+  t1 = now();
   console.log(lineCount);
   console.timeEnd('line count');
   console.log(`Performance now line count timing: ` + (t1 - t0).toFixed(3));

@@ -8,6 +8,8 @@ var firstNames = [];
 var dupeNames = {};
 var dateDonationCount = [];
 var dateDonations = {};
+var t0 = now();
+var t1 = now();
 
 var s = fs
   // .createReadStream('test.txt')
@@ -18,7 +20,7 @@ var s = fs
     es
       .mapSync(function(line) {
         console.time('line count');
-        let t0 = now();
+        t0 = now();
 
         totalLines++;
 
@@ -61,7 +63,7 @@ var s = fs
       })
       .on('end', function() {
         console.log('Read entire file.');
-        let t1 = now();
+        t1 = now();
         console.log(totalLines);
         console.timeEnd('line count');
         console.log(
