@@ -10,12 +10,12 @@ Download the large file zip here: https://www.fec.gov/files/bulk-downloads/2018/
 The main file in the zip: `itcont.txt`, can only be processed by the `readFileEventStream.js` file, the other two implementations can't handle the 2.55GB file size in memory (Node.js can only hold about 1.5GB in memory at one time).
 
 ### To Run
-Before the first run, run `npm install` from the command line to install the `event-stream` package from Node.
+Before the first run, run `npm install` from the command line to install the `event-stream` and `performance.now` packages from Node.
 
 Add the file path for one of the files (could be the big one `itcont.txt` or any of its smaller siblings in the `indiv18` folder that were just downloaded), and type the command `node <FILE_NAME_TO_RUN>` in the command line.
 
 Then you'll see the answers required from the file printed out to the terminal.
 
 ### To Check Performance Testing
-Use one of the smaller files contained within the `indiv18` folder - they're all about 400MB and can be used with all 3 implementations. Run those along with the `console.time` references and you can see which solution is more performant and by how much.
+Use one of the smaller files contained within the `indiv18` folder - they're all about 400MB and can be used with all 3 implementations. Run those along with the `console.time` and `performance.now()` references and you can see which solution is more performant and by how much.
 
