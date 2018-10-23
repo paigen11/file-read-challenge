@@ -21,7 +21,6 @@ var s = fs
       .mapSync(function(line) {
         console.time('line count');
         t0 = now();
-
         totalLines++;
 
         // get all names
@@ -67,14 +66,16 @@ var s = fs
         console.log(totalLines);
         console.timeEnd('line count');
         console.log(
-          `Performance now line count timing: ` + (t1 - t0).toFixed(3),
+          `Performance now line count timing: ` + (t1 - t0).toFixed(3) + `ms`,
         );
 
         // console.log(names[432]);
         console.log(names);
         t1 = now();
         console.timeEnd('names');
-        console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3));
+        console.log(
+          `Performance now names timing: ` + (t1 - t0).toFixed(3) + `ms`,
+        );
 
         // most common first name
         firstNames.forEach(x => {
@@ -90,7 +91,7 @@ var s = fs
         t1 = now();
         console.timeEnd('most common first name');
         console.log(
-          `Performance now first name timing: ` + (t1 - t0).toFixed(3),
+          `Performance now first name timing: ` + (t1 - t0).toFixed(3) + `ms`,
         );
 
         // number of donations per month
@@ -106,7 +107,9 @@ var s = fs
         t1 = now();
         console.timeEnd('total donations for each month');
         console.log(
-          `Performance now donations per month timing: ` + (t1 - t0).toFixed(3),
+          `Performance now donations per month timing: ` +
+            (t1 - t0).toFixed(3) +
+            `ms`,
         );
       }),
   );

@@ -18,7 +18,9 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   console.log(totalLines);
   let t1 = now();
   console.timeEnd('line count');
-  console.log(`Performance now line count timing: ` + (t1 - t0).toFixed(3));
+  console.log(
+    `Performance now line count timing: ` + (t1 - t0).toFixed(3) + `ms`,
+  );
 
   console.time('names');
   t0 = now();
@@ -34,7 +36,7 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   console.log(names[43243]);
   t1 = now();
   console.timeEnd('names');
-  console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3));
+  console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3) + `ms`);
 
   console.time('most common first name');
   t0 = now();
@@ -65,7 +67,9 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   console.log(sortedDupeNames[0]);
   t1 = now();
   console.timeEnd('most common first name');
-  console.log(`Performance now first name timing: ` + (t1 - t0).toFixed(3));
+  console.log(
+    `Performance now first name timing: ` + (t1 - t0).toFixed(3) + `ms`,
+  );
 
   console.time('total donations for each month');
   t0 = now();
@@ -88,6 +92,8 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   t1 = now();
   console.timeEnd('total donations for each month');
   console.log(
-    `Performance now donations per month timing: ` + (t1 - t0).toFixed(3),
+    `Performance now donations per month timing: ` +
+      (t1 - t0).toFixed(3) +
+      `ms`,
   );
 });

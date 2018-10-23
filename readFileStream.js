@@ -65,14 +65,16 @@ rl.on('close', function() {
   t1 = now();
   console.log(lineCount);
   console.timeEnd('line count');
-  console.log(`Performance now line count timing: ` + (t1 - t0).toFixed(3));
+  console.log(
+    `Performance now line count timing: ` + (t1 - t0).toFixed(3) + `ms`,
+  );
 
   // names at various points in time
   console.log(names[432]);
   console.log(names[43243]);
   t1 = now();
   console.timeEnd('names');
-  console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3));
+  console.log(`Performance now names timing: ` + (t1 - t0).toFixed(3) + `ms`);
 
   // most common first name
   firstNames.forEach(x => {
@@ -87,7 +89,9 @@ rl.on('close', function() {
   console.log(sortedDupeNames[0]);
   t1 = now();
   console.timeEnd('most common first name');
-  console.log(`Performance now first name timing: ` + (t1 - t0).toFixed(3));
+  console.log(
+    `Performance now first name timing: ` + (t1 - t0).toFixed(3) + `ms`,
+  );
 
   // number of donations per month
   dateDonationCount.forEach(x => {
@@ -102,6 +106,8 @@ rl.on('close', function() {
   t1 = now();
   console.timeEnd('total donations for each month');
   console.log(
-    `Performance now donations per month timing: ` + (t1 - t0).toFixed(3),
+    `Performance now donations per month timing: ` +
+      (t1 - t0).toFixed(3) +
+      `ms`,
   );
 });
