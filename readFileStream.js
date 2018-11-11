@@ -93,7 +93,7 @@ rl.on('close', function() {
     return b[1] - a[1];
   });
   console.log(sortedDupeNames[0]);
-  t1 = now();
+  t5 = now();
   console.timeEnd('most common first name');
   console.log(
     `Performance now first name timing: ` + (t5 - t4).toFixed(3) + `ms`,
@@ -109,7 +109,7 @@ rl.on('close', function() {
     );
   };
   new Map(Object.entries(dateDonations)).forEach(logDateElements);
-  t1 = now();
+  t7 = now();
   console.timeEnd('total donations for each month');
   console.log(
     `Performance now donations per month timing: ` +
