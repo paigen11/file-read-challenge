@@ -17,10 +17,10 @@ var t5;
 var t6;
 var t7;
 
+const args = process.argv.splice(process.execArgv.length + 2);
+
 var s = fs
-  // .createReadStream('test.txt')
-  .createReadStream('itcont.txt')
-  // .createReadStream('/Users/pxn5096/Downloads/indiv18/itcont.txt')
+  .createReadStream(args[0])
   .pipe(es.split())
   .pipe(
     es

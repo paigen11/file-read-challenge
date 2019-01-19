@@ -1,2 +1,5 @@
-itcont.txt
+.idea
+
+data/*.zip
+data/*cont*.txt
 node_modules/

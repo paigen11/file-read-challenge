@@ -3,7 +3,9 @@ var readline = require('readline');
 var stream = require('stream');
 var now = require('performance-now');
 
-var instream = fs.createReadStream('itcont.txt');
+var args = process.argv.splice(process.execArgv.length + 2);
+
+var instream = fs.createReadStream(args[0]);
 var outstream = new stream();
 var rl = readline.createInterface(instream, outstream);
 
