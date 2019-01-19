@@ -40,7 +40,7 @@ var s = fs
         // get all first halves of names
         console.time('most common first name');
         t4 = now();
-        var firstHalfOfName = name.split(', ')[1];
+        var firstHalfOfName = name && name.split(', ')[1];
 
         if (firstHalfOfName !== undefined) {
           firstHalfOfName.trim();
@@ -58,7 +58,7 @@ var s = fs
         // year and month
         console.time('total donations for each month');
         t6 = now();
-        var timestamp = line.split('|')[4].slice(0, 6);
+        var timestamp = line && line.split('|')[4].slice(0, 6);
         var formattedTimestamp =
           timestamp.slice(0, 4) + '-' + timestamp.slice(4, 6);
         dateDonationCount.push(formattedTimestamp);

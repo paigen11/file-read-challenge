@@ -9,11 +9,16 @@ var dupeNames = {};
 var dateDonationCount = [];
 var dateDonations = {};
 
-fs.readFile('itcont.txt', 'utf8', (err, contents) => {
+var args = process.argv.splice(process.execArgv.length + 2);
+
+fs.readFile(args[0], 'utf8', (err, contents) => {
   console.time('line count');
   let t0 = now();
   if (contents !== undefined) {
     totalLines = contents.split('\n').length - 1;
+  } else {
+    console.log('could not read data');
+    process.exit();
   }
   console.log(totalLines);
   let t1 = now();
@@ -41,7 +46,7 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   console.time('most common first name');
   t0 = now();
   names.forEach(name => {
-    var firstHalfOfName = name.split(', ')[1];
+    var firstHalfOfName = name && name.split(', ')[1];
     if (firstHalfOfName !== undefined) {
       firstHalfOfName.trim();
 
@@ -74,7 +79,7 @@ fs.readFile('itcont.txt', 'utf8', (err, contents) => {
   console.time('total donations for each month');
   t0 = now();
   lines.forEach(line => {
-    var timestamp = line.split('|')[4].slice(0, 6);
+    var timestamp = line && line.split('|')[4].slice(0, 6);
     var formattedTimestamp =
       timestamp.slice(0, 4) + '-' + timestamp.slice(4, 6);
     dateDonationCount.push(formattedTimestamp);
