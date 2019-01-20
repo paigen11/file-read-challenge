@@ -1,23 +1,9 @@
 {
-  "name": "readfilechallenge",
-  "version": "1.0.0",
-  "description": "This is an example of 3 different ways to use Node.js to process big data files. One file is the Node.js' `fs.readFile()`, another is with Node.js' `fs.createReadSteam()`, and the final is with the help of the NPM module `EventStream`.",
-  "main": "readFile.js",
-  "dependencies": {
-    "performance-now": "^2.1.0"
-  },
+  "name": "nodejs-streaming",
+  "version": "0.1.0",
+  "description": "",
+  "dependencies": {},
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paigen11/file-read-challenge.git"
-  },
-  "author": "Paige Niedringhaus",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/paigen11/file-read-challenge/issues"
-  },
-  "homepage": "https://github.com/paigen11/file-read-challenge#readme"
+  "scripts": {},
+  "license": "ISC"
 }
