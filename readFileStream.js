@@ -3,7 +3,9 @@ var readline = require('readline');
 var stream = require('stream');
 var now = require('performance-now');
 
+// var instream = fs.createReadStream('test.txt');
 var instream = fs.createReadStream('itcont.txt');
+
 var outstream = new stream();
 var rl = readline.createInterface(instream, outstream);
 
@@ -21,30 +23,29 @@ var dateDonations = {};
 var firstNames = [];
 var dupeNames = {};
 
-var t0;
+var t0 = now();
 var t1;
-var t2;
+var t2 = now();
 var t3;
-var t4;
+var t4 = now();
 var t5;
-var t6;
+var t6 = now();
 var t7;
+
+console.time('line count');
+console.time('names');
+console.time('most common first name');
+console.time('total donations for each month');
 
 rl.on('line', function(line) {
   // increment line count
-  console.time('line count');
-  t0 = now();
   lineCount++;
 
   // get all names
-  console.time('names');
-  t2 = now();
   var name = line.split('|')[7];
   names.push(name);
 
   // get all first halves of names
-  console.time('most common first name');
-  t4 = now();
   var firstHalfOfName = name.split(', ')[1];
   if (firstHalfOfName !== undefined) {
     firstHalfOfName.trim();
@@ -53,17 +54,19 @@ rl.on('line', function(line) {
       firstName = firstHalfOfName.split(' ')[0];
       firstName.trim();
       firstNames.push(firstName);
+      dupeNames[firstName] = (dupeNames[firstName] || 0) + 1;
     } else {
       firstNames.push(firstHalfOfName);
+      dupeNames[firstHalfOfName] = (dupeNames[firstHalfOfName] || 0) + 1;
     }
   }
 
   // year and month
-  console.time('total donations for each month');
-  t6 = now();
   var timestamp = line.split('|')[4].slice(0, 6);
   var formattedTimestamp = timestamp.slice(0, 4) + '-' + timestamp.slice(4, 6);
   dateDonationCount.push(formattedTimestamp);
+  dateDonations[formattedTimestamp] =
+    (dateDonations[formattedTimestamp] || 0) + 1;
 });
 
 rl.on('close', function() {
@@ -83,11 +86,7 @@ rl.on('close', function() {
   console.log(`Performance now names timing: ` + (t3 - t2).toFixed(3) + `ms`);
 
   // most common first name
-  firstNames.forEach(x => {
-    dupeNames[x] = (dupeNames[x] || 0) + 1;
-  });
-  var sortedDupeNames = [];
-  sortedDupeNames = Object.entries(dupeNames);
+  var sortedDupeNames = Object.entries(dupeNames);
 
   sortedDupeNames.sort((a, b) => {
     return b[1] - a[1];
@@ -98,11 +97,13 @@ rl.on('close', function() {
   console.log(
     `Performance now first name timing: ` + (t5 - t4).toFixed(3) + `ms`,
   );
+  const name = sortedDupeNames[0][0];
+  const nameOccurrences = sortedDupeNames[0][1];
+  console.log(
+    `The most common name is '${name}' with ${nameOccurrences} occurrences.`,
+  );
 
   // number of donations per month
-  dateDonationCount.forEach(x => {
-    dateDonations[x] = (dateDonations[x] || 0) + 1;
-  });
   logDateElements = (key, value, map) => {
     console.log(
       `Donations per month and year: ${value} and donation count ${key}`,
