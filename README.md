@@ -1,4 +1,4 @@
-# Node.js Large File / Data Reading & Peformance Testing
+# Node.js Large File / Data Reading & Performance Testing
 
 This is an example of 3 different ways to use Node.js to process big data files. One file is the Node.js' `fs.readFile()`, another is with Node.js' `fs.createReadSteam()`, and the final is with the help of the NPM module `EventStream`.
 
