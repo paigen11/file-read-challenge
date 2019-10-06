@@ -63,7 +63,7 @@ rl.on('line', (line) => {
 
 	var jstring = "{ "
 
-	for (i = 0; i < 2; i++) {
+	for (i = 0; i < 3; i++) {
 
 		jstring = jstring + "\"" + myHdr[i] + "\" : " + "\"" + myTrans[i] + "\"\, "
 
