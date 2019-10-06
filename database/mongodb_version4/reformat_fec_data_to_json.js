@@ -7,11 +7,28 @@
  *
  * The specific input files being reformatted by this code are the
  * SEC records of political donations by individuals, of USD $200.00
- * or more. For example, the "indiv20.zip" file in the SEC bulk 
+ * or more. For example, the "indiv20.zip" file in the FEC bulk 
  * downloads area contains multiple *.txt files, each of which records
  * a political donation of $200.00 or more by a named individual. 
  * The record layout is provided in the "documentation" folder appearing
  * at the root folder of this repository.
  *
  */
+
+const fs = require('fs');
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: fs.createReadStream('process.argv[2]'),
+  crlfDelay: Infinity
+});
+
+rl.on('line', (line) => {
+  console.log(`Line from file: ${line}`);
+});
+
+rl.on('close', () => {
+  console.log('Have a great day!')
+})
+
 
