@@ -61,7 +61,15 @@ rl.on('line', (line) => {
 
 	var myTrans = line.split('|')
 
-	console.log('Elements from the transaction ' + myTrans) 
+	var jstring = "{ "
+
+	for (i = 0; i < 2; i++) {
+
+		jstring = jstring + "\"" + myHdr[i] + "\" : " + myTrans[i]
+
+	}
+
+	console.log(jstring) 
 
   }
 
