@@ -18,17 +18,38 @@
 const fs = require('fs');
 const readline = require('readline');
 
+//Count number of lines
+
+var lineCount = 0;
+
+//An array that holds the header line of the csv file.
+var myHdr = [];
+
 const rl = readline.createInterface({
-  input: fs.createReadStream('process.argv[2]'),
+  input: fs.createReadStream(process.argv[2]),
   crlfDelay: Infinity
 });
 
 rl.on('line', (line) => {
-  console.log(`Line from file: ${line}`);
+  
+  lineCount++
+  
+  if (lineCount === 1) {
+
+	myHdr = line.split('|', 3)
+
+	console.log('The first 3 elements from the header line are ' + myHdr)
+
+  }
+
+  console.log(`Line from file: ${line}`)
+
 });
 
 rl.on('close', () => {
-  console.log('Have a great day!')
+
+  console.log('Number of lines processed is ' + lineCount)
+
 })
 
 
