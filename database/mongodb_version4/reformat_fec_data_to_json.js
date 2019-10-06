@@ -36,7 +36,9 @@ rl.on('line', (line) => {
   
   if (lineCount === 1) {
 
-	myHdr = line.split('|', 3)
+        //Next line is how Paige Niedringhaus splits the line
+
+	myHdr = line.split('|')[3]
 
 	console.log('The first 3 elements from the header line are ' + myHdr)
 
