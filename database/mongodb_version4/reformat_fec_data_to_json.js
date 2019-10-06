@@ -57,7 +57,13 @@ rl.on('line', (line) => {
 
   }
 
-  console.log(`Line from file: ${line}`)
+  if (lineCount > 1) {
+
+	var myTrans = line.split('|')
+
+	console.log('Elements from the transaction ' + myTrans) 
+
+  }
 
 });
 
