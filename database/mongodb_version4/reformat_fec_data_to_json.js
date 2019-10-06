@@ -26,9 +26,14 @@ var lineCount = 0;
 var myHdr = [];
 
 const rl = readline.createInterface({
+
   input: fs.createReadStream(process.argv[2]),
+
   crlfDelay: Infinity
+
 });
+
+// Split and save the first line -- treat that as the header line.
 
 rl.on('line', (line) => {
   
@@ -36,11 +41,19 @@ rl.on('line', (line) => {
   
   if (lineCount === 1) {
 
-        //Next line is how Paige Niedringhaus splits the line
+        /* Code by the original author splits a line using a 
+         * technique like this:
+         *
+	 *        myHdr = line.split('|')[3]
+         *
+         * It has the effect of skipping the first 3 elements and
+         * capturing the fourth element -- and only the fourth. 
+         *
+         */
 
-	myHdr = line.split('|')[3]
+        myHdr = line.split('|')
 
-	console.log('The first 3 elements from the header line are ' + myHdr)
+	console.log('Elements from the header line are ' + myHdr)
 
   }
 
