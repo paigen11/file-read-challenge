@@ -64,7 +64,23 @@ rl.on('line', (line) => {
 
 	var jstring = "{ "
 
-	for (i = 0; i < 16; i++) {
+	for (i = 0; i < 14; i++) {
+
+		/* The 14th index value is the transaction date. This needs to be reformated
+		 * from a MMDDYYYY string to a YYYY-MM-DD string that can be converted to 
+                 * ISO8601 date format acceptable to the MongoDB 'mongoimport' utility.
+                 */
+
+		if (i === 13) {
+
+			var myDateStr = myTrans[i]
+
+			var theISODt = "ISODate\(\"" + myDateStr[4] + myDateStr[5] + myDateStr[6] + myDateStr[7] + "\-" + myDateStr[0] + myDateStr[1]  +  "\-" 
+			
+			theISODt = theISODt + myDateStr[2] + myDateStr[3] + "\"" + "\)"
+
+			console.log("Date value we are processing " + theISODt)  
+		}
 
 		jstring = jstring + "\"" + myHdr[i] + "\" : " + "\"" + myTrans[i] + "\"\, "
 
