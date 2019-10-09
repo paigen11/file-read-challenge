@@ -80,17 +80,19 @@ rl.on('line', (line) => {
 			theISODt = theISODt + myDateStr[2] + myDateStr[3] + "\"" + "\)"
 
 			console.log("Date value we are processing " + theISODt)  
-		}
+
+			jstring = jstring + "\"" + myHdr[i] + "\" : " + theISODt + "\"\, "
+		
+		} else {
 
 		jstring = jstring + "\"" + myHdr[i] + "\" : " + "\"" + myTrans[i] + "\"\, "
 
 	}
 
-	console.log(jstring) 
+ } 
 
-  }
-
-});
+	console.log(jstring)
+} } );
 
 rl.on('close', () => {
 
