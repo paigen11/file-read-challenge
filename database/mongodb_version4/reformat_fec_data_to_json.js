@@ -48,7 +48,8 @@ rl.on('line', (line) => {
          *
          * It has the effect of skipping the first 3 elements and
          * capturing the fourth element -- and only the fourth. 
-         *
+         * What I wish to do is different: split every field out,
+         * in order to reformat them into json-ified records.
          */
 
         myHdr = line.split('|')
@@ -63,7 +64,7 @@ rl.on('line', (line) => {
 
 	var jstring = "{ "
 
-	for (i = 0; i < 13; i++) {
+	for (i = 0; i < 16; i++) {
 
 		jstring = jstring + "\"" + myHdr[i] + "\" : " + "\"" + myTrans[i] + "\"\, "
 
