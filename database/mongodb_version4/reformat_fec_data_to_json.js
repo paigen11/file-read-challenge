@@ -94,9 +94,11 @@ rl.on('line', (line) => {
 
 			var myAmt = myTrans[i]
 
-			var theContr = "\{\"\$numberDecimal\" \: \"" + myAmt + "\"\}"
+			var theContr = "\{\"\$numberDecimal\" \: \"" + myAmt + "\.00\"\}"
 
 			console.log("Amount we are processing " + myAmt + " reformatted data is " + theContr)
+			
+			jstring = jstring + "\"" + myHdr[i] + "\" : " + theContr + "\, "
 
 		} 
 
