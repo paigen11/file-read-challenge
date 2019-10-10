@@ -64,9 +64,9 @@ rl.on('line', (line) => {
 
 	var jstring = "{ "
 
-	for (i = 0; i < 14; i++) {
+	for (i = 0; i < 21; i++) {
 
-		/* The 14th index value is the transaction date. This needs to be reformated
+		/* The 13th index value is the transaction date. This needs to be reformated
 		 * from a MMDDYYYY string to a YYYY-MM-DD string that can be converted to 
                  * ISO8601 date format acceptable to the MongoDB 'mongoimport' utility.
                  */
@@ -81,8 +81,18 @@ rl.on('line', (line) => {
 
 			console.log("Date value we are processing " + theISODt)  
 
-			jstring = jstring + "\"" + myHdr[i] + "\" : " + theISODt + "\"\, "
+			jstring = jstring + "\"" + myHdr[i] + "\" : " + theISODt + "\, "
 		
+		} 
+
+		/* The 20th index value is the final field to be reformatted. We want to close the
+		 * string with a valid JSON closing brace.
+                 */
+
+		else if (i === 20) {
+
+		jstring = jstring + "\"" + myHdr[i] + "\" : " + "\"" + myTrans[i] + "\"" + " \}"
+
 		} else {
 
 		jstring = jstring + "\"" + myHdr[i] + "\" : " + "\"" + myTrans[i] + "\"\, "
