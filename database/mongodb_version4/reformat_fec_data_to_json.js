@@ -77,7 +77,7 @@ rl.on('line', (line) => {
 
 			var theISODt = "ISODate\(\"" + myDateStr[4] + myDateStr[5] + myDateStr[6] + myDateStr[7] + "\-" + myDateStr[0] + myDateStr[1]  +  "\-" 
 			
-			theISODt = theISODt + myDateStr[2] + myDateStr[3] + "\"" + "\)"
+			theISODt = theISODt + myDateStr[2] + myDateStr[3] + "T00\:00\:00Z\"" + "\)"
 
 			console.log("Date value we are processing " + theISODt)  
 
