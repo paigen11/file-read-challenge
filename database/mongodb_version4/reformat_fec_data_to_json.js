@@ -79,8 +79,6 @@ rl.on('line', (line) => {
 			
 			theISODt = theISODt + myDateStr[2] + myDateStr[3] + "T00\:00\:00Z\"" + "\)"
 
-			console.log("Date value we are processing " + theISODt)  
-
 			jstring = jstring + "\"" + myHdr[i] + "\" : " + theISODt + "\, "
 		
 		}
@@ -96,8 +94,6 @@ rl.on('line', (line) => {
 
 			var theContr = "\{\"\$numberDecimal\" \: \"" + myAmt + "\.00\"\}"
 
-			console.log("Amount we are processing " + myAmt + " reformatted data is " + theContr)
-			
 			jstring = jstring + "\"" + myHdr[i] + "\" : " + theContr + "\, "
 
 		} 
