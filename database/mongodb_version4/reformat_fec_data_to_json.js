@@ -86,14 +86,17 @@ rl.on('line', (line) => {
 		}
 
 		/* The 14th index value is the transaction amount field. Reformat this into a 
-		 * $numberDecimal value (also known as Decimal128.) 
+		 * $numberDecimal value (also known as Decimal128.) The value has to be formatted
+                 * like so: "TRANSACTION_AMT" : {"$numberDecimal" : "120.00"} 
                  */
 
 		else if (i === 14) {
 
 			var myAmt = myTrans[i]
 
-			console.log("Amount we are processing " + myAmt)
+			var theContr = "\{\"\$numberDecimal\" \: \"" + myAmt + "\"\}"
+
+			console.log("Amount we are processing " + myAmt + " reformatted data is " + theContr)
 
 		} 
 
