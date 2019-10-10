@@ -83,6 +83,18 @@ rl.on('line', (line) => {
 
 			jstring = jstring + "\"" + myHdr[i] + "\" : " + theISODt + "\, "
 		
+		}
+
+		/* The 14th index value is the transaction amount field. Reformat this into a 
+		 * $numberDecimal value (also known as Decimal128.) 
+                 */
+
+		else if (i === 14) {
+
+			var myAmt = myTrans[i]
+
+			console.log("Amount we are processing " + myAmt)
+
 		} 
 
 		/* The 20th index value is the final field to be reformatted. We want to close the
