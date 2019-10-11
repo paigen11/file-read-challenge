@@ -21,12 +21,12 @@ dictionary.txt explains the data provided in each field of a contribution record
 
 The indiv18.zip file contains several files in the archive, some of which are quite large. The zip file alone can take 5+ minutes to download, depending on connection speed. 
 
-The main file in the zip: `itcont.txt`, is quite large. It can only be processed by the `readFileEventStream.js` file, the other two scripts in this repository can't handle the 2.55GB file size in memory (Node.js can only hold about 1.5GB in memory at one time).*
+The main file in the zip: `itcont.txt`, is the largest in size at 2.55 GiB. It can only be processed by the `readFileEventStream.js` script file, the other two scripts in this repository can't handle the file size in memory. Node.js can only hold about 1.5GB in memory at one time.*
 
-*Caveat: You can override the standard Node memory limit using the CLI arugment `max-old-space-size=XYZ`. To run, pass in `node --max-old-space-size=8192 <FILE NAME>.js` (this will increase Node's memory limit to 8gb - just be careful not to make it too large that Node kills off other processes or crashes because its run out of memory)
+*Caveat: You can override the standard Node memory limit using the CLI arugment `max-old-space-size=XYZ`. To run, pass in `node --max-old-space-size=8192 <FILE NAME>.js` This will increase Node's memory limit to 8 GiB - just be careful not to make the value so large that Node kills off other processes or crashes because it runs out of memory.
 
 ### To Run
-Before the first run, run `npm install` from the command line to install the `event-stream` and `performance.now` packages from Node.
+Before the first run, run `npm install` from the command line to install the `event-stream` and `performance.now` packages from Node. You may want to check the package.json file to adjust which versions of the external modules you are installing.
 
 Add the file path for one of the files (could be the big one `itcont.txt` or any of its smaller siblings in the `indiv18` folder that were just downloaded), and type the command `node <FILE_NAME_TO_RUN>` in the command line.
 
@@ -36,14 +36,14 @@ Then you'll see the answers required from the file printed out to the terminal.
 Use one of the smaller files contained within the `indiv18` folder - they're all about 400MB and can be used with all 3 implementations. Run those along with the `console.time` and `performance.now()` references and you can see which solution is more performant and by how much.
 
 ### To Put FEC Contribution Records in a MongoDB v4.x Collection
-It is possible to reformat the input records to a Javascript Object Notation (JSON) format compatible with MongoDB database version 4.x. You must do some additional preparation work.
+It is possible to reformat the input records to a Javascript Object Notation (JSON) format compatible with MongoDB database version 4.x. You must do some additional preparation work. The instructions here assume you are familiar with the Linux command line and Linux-based utilities such as sed and egrep.
 
 Download and unzip the indiv18.zip file. Download the header file noted above. Make note of the path where you unzipped the contribution files to.
 The header file is in comma separated values format, using actual commas ',' as the separator. You must change the separator to a pipe symbol '|'.
 
 `sed 's/\,/\|/g' < indiv_header_file.csv > test1.csv`
 
-You must append individual contribution records to this test1.csv file. For testing purposes, I like to use egrep to extract records of interest, such as contributors employed by particular companies.
+You must append individual contribution records to this test1.csv file. For testing purposes, use egrep to extract records of interest, such as contributors employed by particular companies.
 
 `egrep 'PFIZER' >> test1.csv`
     
@@ -60,6 +60,8 @@ The input file test1.csv is reformatted to json and the output file is in the re
 You can then import this reformatted data into a MongoDB version 4.x collection using the mongoimport utility, like so:
 
 `mongoimport --db fecdata --collection t1 --file test1.json`
+
+The advantage of loading this data into a MongoDB collection is that you can then perform aggregation queries on the collection using the db.collection.aggregate() utility of MongoDB.
 
 Contributor BobCochran has only tested the script with 1,563 input records. The script has not been thoroughly tested, in other words.  
 
