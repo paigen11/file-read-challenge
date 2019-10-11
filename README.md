@@ -21,7 +21,7 @@ dictionary.txt explains the data provided in each field of a contribution record
 
 The indiv18.zip file contains several files in the archive, some of which are quite large. The zip file alone can take 5+ minutes to download, depending on connection speed. 
 
-The main file in the zip: `itcont.txt`, is the largest in size at 2.55 GiB. It can only be processed by the `readFileEventStream.js` script file, the other two scripts in this repository can't handle the file size in memory. Node.js can only hold about 1.5GB in memory at one time.*
+The main file in the zip archive: `itcont.txt`, is the largest in size at 2.55 GiB. It can only be processed by the `readFileEventStream.js` script file. The other two scripts in this repository can't handle the input file size in memory. Node.js can only hold about 1.5GB in memory at one time.*
 
 *Caveat: You can override the standard Node memory limit using the CLI arugment `max-old-space-size=XYZ`. To run, pass in `node --max-old-space-size=8192 <FILE NAME>.js` This will increase Node's memory limit to 8 GiB - just be careful not to make the value so large that Node kills off other processes or crashes because it runs out of memory.
 
@@ -63,5 +63,6 @@ You can then import this reformatted data into a MongoDB version 4.x collection 
 
 The advantage of loading this data into a MongoDB collection is that you can then perform aggregation queries on the collection using the db.collection.aggregate() utility of MongoDB.
 
-Contributor BobCochran has only tested the script with 1,563 input records. The script has not been thoroughly tested, in other words.  
+Contributor BobCochran has only tested the script with 1,563 input records. The script has not been thoroughly tested, in other words. To test the reformatting, Node.js version 10.16.3 was used. 
+
 
