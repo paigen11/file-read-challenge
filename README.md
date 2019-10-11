@@ -1,13 +1,26 @@
 # Node.js Large File / Data Reading & Performance Testing
 
-This is an example of 3 different ways to use Node.js to process big data files. One file is the Node.js' `fs.readFile()`, another is with Node.js' `fs.createReadSteam()`, and the final is with the help of the NPM module `EventStream`.
+The challenge is to process a really large text file sourced from the Federal Elections Commission. The input data consists of records of monetary contributions by individuals to poltitical entities.
+  
+Code provided in this repository is in the form of Node.js scripts. They showcase 3 different approaches to process big data files. One script utilizes the Node.js `fs.readFile()` API, another utilizes `fs.createReadSteam()`, and the final script incorporates the external NPM module `EventStream`.
 
-There is also use of `console.time` and `console.timeEnd` to determine the performance of the 3 different implementations, and which is most efficient processing the files.
+`console.time` and `console.timeEnd` are used to determine the performance of the 3 different implementations, and which is most efficient processing of the input files.
 
 ### To Download the Really Large File
 Download the large file zip here: https://www.fec.gov/files/bulk-downloads/2018/indiv18.zip
 
-The main file in the zip: `itcont.txt`, can only be processed by the `readFileEventStream.js` file, the other two implementations can't handle the 2.55GB file size in memory (Node.js can only hold about 1.5GB in memory at one time).*
+### To Download the Dictionary and Header Files 
+
+The indiv18.zip contains files which are essentially in a comma separated values style. There are 21 fields. To make sense of them, you need to get additional files from the data_dictionaries folder. Download these as well:
+
+bulk-downloads/data_dictionaries/indiv_dictionary.txt
+bulk-downloads/data_dictionaries/indiv_header_file.csv
+
+dictionary.txt explains the data provided in each field of a contribution record. header_file.csv is formatted as a header record in comma separated values format, with one heading for each field provided in the contribution record.
+
+The indiv18.zip file contains several files in the archive, some of which are quite large. The zip file alone can take 5+ minutes to download, depending on connection speed. 
+
+The main file in the zip: `itcont.txt`, is quite large. It can only be processed by the `readFileEventStream.js` file, the other two scripts in this repository can't handle the 2.55GB file size in memory (Node.js can only hold about 1.5GB in memory at one time).*
 
 *Caveat: You can override the standard Node memory limit using the CLI arugment `max-old-space-size=XYZ`. To run, pass in `node --max-old-space-size=8192 <FILE NAME>.js` (this will increase Node's memory limit to 8gb - just be careful not to make it too large that Node kills off other processes or crashes because its run out of memory)
 
@@ -21,5 +34,31 @@ Then you'll see the answers required from the file printed out to the terminal.
 ### To Check Performance Testing
 Use one of the smaller files contained within the `indiv18` folder - they're all about 400MB and can be used with all 3 implementations. Run those along with the `console.time` and `performance.now()` references and you can see which solution is more performant and by how much.
 
+### To Put FEC Contribution Records in a MongoDB v4.x Collection
+It is possible to reformat the input records to a Javascript Object Notation (JSON) format compatible with MongoDB database version 4.x. You must do some additional preparation work.
 
+Download and unzip the indiv18.zip file. Download the header file noted above. Make note of the path where you unzipped the contribution files to.
+The header file is in comma separated values format, using actual commas ',' as the separator. You must change the separator to a pipe symbol '|'.
+
+`sed 's/\,/\|/g' < indiv_header_file.csv > test1.csv`
+
+You must append individual contribution records to this test1.csv file. For testing purposes, I like to use egrep to extract records of interest, such as contributors employed by particular companies.
+
+`egrep 'PFIZER' >> test1.csv`
+    
+Navigate to the database/mongodb_version4 folder.
+
+Create a new folder named 'reformatted' in that folder.
+
+On the command line, issue 
+
+`node reformat_fec_data_to_json.js path/to/your/test1.csv`
+
+The input file test1.csv is reformatted to json and the output file is in the reformatted/ folder that you created. It will have a *.json extension. You can change the name of the output file by changing the writeStream arguments in the reformat_fec_data_to_json.js script.
+
+You can then import this reformatted data into a MongoDB version 4.x collection using the mongoimport utility, like so:
+
+`mongoimport --db fecdata --collection t1 --file test1.json`
+
+Contributor BobCochran has only tested the script with 1,563 input records. The script has not been thoroughly tested, in other words.  
 
