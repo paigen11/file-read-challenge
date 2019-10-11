@@ -35,7 +35,7 @@ const rl = readline.createInterface({
 
 // Create a writeStream so we can write the reformatted output to a file 
 
-const writeStream = fs.createWriteStream( "./reformatted/test10b.json", { encoding: "utf8"} );
+const writeStream = fs.createWriteStream( "./reformatted/test10c.json", { encoding: "utf8"} );
 
 // Split and save the first line -- treat that as the header line.
 
@@ -98,7 +98,7 @@ rl.on('line', (line) => {
 
 			/* Is the amount field a real number? */
 
-			if (!isNaN(myAmt) || !isEmptyOrSpaces(myAmt)) {
+			if (!isNaN(myAmt) || !isEmptyOrSpaces(myAmt) || (typeof myAmt !== 'undefined')) {
 
 				var theContr = "\{\"\$numberDecimal\" \: \"" + myAmt + "\.00\"\}"
 
