@@ -45,7 +45,7 @@ The header file is in comma separated values format, using actual commas ',' as 
 
 You must append individual contribution records to this test1.csv file. For testing purposes, use egrep to extract records of interest, such as contributors employed by particular companies.
 
-`egrep 'PFIZER' >> test1.csv`
+`egrep 'PFIZER' itcont_2018_20181228_52010302.txt >> test1.csv`
     
 Navigate to the database/mongodb_version4 folder.
 
