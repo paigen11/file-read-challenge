@@ -1,6 +1,6 @@
 # Node.js Large File / Data Reading & Performance Testing
 
-The challenge is to process a really large text file sourced from the Federal Elections Commission. The input data consists of records of monetary contributions by individuals to poltitical entities.
+The challenge is to process a really large text file sourced from the Federal Election Commission. The input data consists of records of monetary contributions by individuals to poltitical entities.
   
 Code provided in this repository is in the form of Node.js scripts. They showcase 3 different approaches to process big data files. One script utilizes the Node.js `fs.readFile()` API, another utilizes `fs.createReadSteam()`, and the final script incorporates the external NPM module `EventStream`.
 
@@ -14,6 +14,7 @@ Download the large file zip here: https://www.fec.gov/files/bulk-downloads/2018/
 The indiv18.zip contains files which are essentially in a comma separated values style. There are 21 fields. To make sense of them, you need to get additional files from the data_dictionaries folder. Download these as well:
 
 bulk-downloads/data_dictionaries/indiv_dictionary.txt
+
 bulk-downloads/data_dictionaries/indiv_header_file.csv
 
 dictionary.txt explains the data provided in each field of a contribution record. header_file.csv is formatted as a header record in comma separated values format, with one heading for each field provided in the contribution record.
