@@ -1,17 +1,22 @@
-# Node.js Large File / Data Reading & Performance Testing
+# Node.js Read Large Files Challenge
 
-The challenge is to process a really large text file sourced from the Federal Election Commission. The input data consists of records of monetary contributions by individuals to poltitical entities.
+The challenge is to efficiently process a really large text file sourced from the Federal Election Commission. The input data consists of records of monetary contributions by individuals to poltitical entities. 
   
 Code provided in this repository is in the form of Node.js scripts. They showcase 3 different approaches to process big data files. One script utilizes the Node.js `fs.readFile()` API, another utilizes `fs.createReadSteam()`, and the final script incorporates the external NPM module `EventStream`.
 
+## Performance Testing of the Different Large File Reading Strategies
+
 `console.time` and `console.timeEnd` are used to determine the performance of the 3 different implementations, and which is most efficient processing of the input files.
 
-### To Download the Really Large File
+### To Download the Really Large FEC File
+
+The text file to be processed consists of records of politcal campaign contributions by individuals during the 2018 election cycle.
+
 Download the large file zip here: https://www.fec.gov/files/bulk-downloads/2018/indiv18.zip
 
 ### To Download the Dictionary and Header Files 
 
-The indiv18.zip contains files which are essentially in a comma separated values style. There are 21 fields. To make sense of them, you need to get additional files from the data_dictionaries folder. Download these as well:
+The indiv18.zip contains files which are essentially in a comma separated values style. There are 21 fields. To make sense of them, you need to get additional files from the data_dictionaries folder. A "Documentation" folder is provided which contains the two files listed below. However, these files apply to the 2018 election data. If the file layouts have changed in subsequent election years, you will need to download the correct ones for the election cycle you are processing. Generally, you will want to  download from the Federal Election Commission "bulk downloads" site. The data_dictionaries folder should be checked for files named like the below. Download them if needed:
 
 bulk-downloads/data_dictionaries/indiv_dictionary.txt
 
@@ -35,7 +40,7 @@ Then you'll see the answers required from the file printed out to the terminal.
 ### To Check Performance Testing
 Use one of the smaller files contained within the `indiv18` folder - they're all about 400MB and can be used with all 3 implementations. Run those along with the `console.time` and `performance.now()` references and you can see which solution is more performant and by how much.
 
-### To Put FEC Contribution Records in a MongoDB v4.x Collection
+### Option: Put FEC Contribution Records in a MongoDB v4.x Database Collection
 It is possible to reformat the input records to a Javascript Object Notation (JSON) format compatible with MongoDB database version 4.x. You must do some additional preparation work. The instructions here assume you are familiar with the Linux command line and Linux-based utilities such as sed and egrep.
 
 Download and unzip the indiv18.zip file. Download the header file noted above. Make note of the path where you unzipped the contribution files to.
@@ -63,6 +68,6 @@ You can then import this reformatted data into a MongoDB version 4.x collection 
 
 The advantage of loading this data into a MongoDB collection is that you can then perform aggregation queries on the collection using the db.collection.aggregate() utility of MongoDB.
 
-Contributor BobCochran has only tested the script with 1,563 input records. The script has not been thoroughly tested, in other words. To test the reformatting, Node.js version 10.16.3 was used. 
+Contributor @BobCochran has only tested the script with 1,563 input records. The script has not been thoroughly tested, in other words. To test the reformatting, Node.js version 10.16.3 was used. 
 
 
