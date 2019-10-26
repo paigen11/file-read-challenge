@@ -35,7 +35,7 @@ const rl = readline.createInterface({
 
 // Create a writeStream so we can write the reformatted output to a file 
 
-const writeStream = fs.createWriteStream( "./reformatted/test8a.json", { encoding: "utf8"} );
+const writeStream = fs.createWriteStream( "./reformatted/test9a.json", { encoding: "utf8"} );
 
 // Split and save the first line -- treat that as the header line.
 
@@ -104,11 +104,11 @@ rl.on('line', (line) => {
 
 				jstring = jstring + "\"" + myHdr[i] + "\" : " + theContr + "\, "
 
-				console.log("The myTrans array " + myTrans)
+//				console.log("The myTrans array " + myTrans)
 
-				console.log("The myAmt value " + myAmt)
+//				console.log("The myAmt value " + myAmt)
 
-				console.log("The typeof for myAmt " + typeof myAmt)
+//				console.log("The typeof for myAmt " + typeof myAmt)
 
 			} else {
 
@@ -138,7 +138,7 @@ rl.on('line', (line) => {
 
  } 
 
-	console.log(jstring)
+//	console.log(jstring)
 
 	writeStream.write(jstring)
 
