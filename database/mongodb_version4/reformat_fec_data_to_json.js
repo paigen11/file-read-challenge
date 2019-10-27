@@ -35,7 +35,7 @@ const rl = readline.createInterface({
 
 // Create a writeStream so we can write the reformatted output to a file 
 
-const writeStream = fs.createWriteStream( "./reformatted/test9a.json", { encoding: "utf8"} );
+const writeStream = fs.createWriteStream( "./reformatted/test1.json", { encoding: "utf8"} );
 
 // Split and save the first line -- treat that as the header line.
 
