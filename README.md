@@ -68,6 +68,6 @@ You can then import this reformatted data into a MongoDB version 4.x collection 
 
 The advantage of loading this data into a MongoDB collection is that you can then perform aggregation queries on the collection using the db.collection.aggregate() utility of MongoDB. You can also index the collection as you prefer.
 
-Contributor @BobCochran has only tested the script with 271,237 input records. The script has not been thoroughly tested, in other words. To test the reformatting, Node.js versions 10.16.3 and 12.3.0 were used. The reformatted data was added to a standalone instance of MongoDB Enterprise server version 4.0.13, running in a Ubuntu version 18.04.3 LTS server.
+Contributor BobCochran has only tested the script with 271,237 input records. To test the reformatting, Node.js versions 10.16.3 and 12.3.0 were used. The reformatted data was added to a standalone instance of MongoDB Enterprise server version 4.0.13, running in a Ubuntu version 18.04.3 LTS server.
 
 
