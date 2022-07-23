@@ -4,7 +4,7 @@
   "description": "This is an example of 3 different ways to use Node.js to process big data files. One file is the Node.js' `fs.readFile()`, another is with Node.js' `fs.createReadSteam()`, and the final is with the help of the NPM module `EventStream`.",
   "main": "readFile.js",
   "dependencies": {
-    "event-stream": "^3.3.4",
+    "event-stream": "4.0.1",
     "performance-now": "^2.1.0"
   },
   "devDependencies": {},
